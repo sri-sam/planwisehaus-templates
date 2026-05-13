@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Spacing</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  .row {
+    display: grid;
+    grid-template-columns: 96px 80px 200px 1fr;
+    align-items: center;
+    column-gap: 18px;
+    padding: 10px 0;
+    border-bottom: 1px solid #F0EDE5;
+  }
+  .row:last-child { border-bottom: none; }
+  .row__token {
+    font-family: var(--pwh-font-mono);
+    font-size: 14px;
+    color: var(--pwh-primary);
+    font-weight: 700;
+  }
+  .row__px {
+    font-family: var(--pwh-font-mono);
+    font-size: 13px;
+    color: var(--pwh-fg-3);
+  }
+  .row__bar {
+    display: flex;
+    align-items: center;
+    height: 18px;
+  }
+  .row__bar div {
+    height: 18px;
+    background: var(--pwh-secondary);
+    border-radius: 3px;
+  }
+  .row__role {
+    font-size: 14px;
+    color: var(--pwh-fg-2);
+    line-height: 1.4;
+  }
+</style>
+</head>
+<body>
+<div class="card" style="padding:26px 28px 28px;">
+  <div class="eyebrow" style="font-size:12px;">SPACING — 4PX BASE · 12 STEPS</div>
+
+  <div style="display:flex;flex-direction:column;">
+    <div class="row">
+      <span class="row__token">space-0</span>
+      <span class="row__px">0 px</span>
+      <span class="row__bar"><div style="width:2px;background:transparent;border-left:2px dashed var(--pwh-gray);height:18px;"></div></span>
+      <span class="row__role">Tight reset · table cell gutters</span>
+    </div>
+    <div class="row">
+      <span class="row__token">space-1</span>
+      <span class="row__px">4 px</span>
+      <span class="row__bar"><div style="width:4px;"></div></span>
+      <span class="row__role">Hairline gap · icon ↔ label</span>
+    </div>
+    <div class="row">
+      <span class="row__token">space-2</span>
+      <span class="row__px">8 px</span>
+      <span class="row__bar"><div style="width:8px;"></div></span>
+      <span class="row__role">Inline elements · pill padding</span>
+    </div>
+    <div class="row">
+      <span class="row__token">space-3</span>
+      <span class="row__px">12 px</span>
+      <span class="row__bar"><div style="width:12px;"></div></span>
+      <span class="row__role">Form fields · KPI grid gap</span>
+    </div>
+    <div class="row">
+      <span class="row__token">space-4</span>
+      <span class="row__px">16 px</span>
+      <span class="row__bar"><div style="width:16px;"></div></span>
+      <span class="row__role">Card / cell padding</span>
+    </div>
+    <div class="row">
+      <span class="row__token">space-5</span>
+      <span class="row__px">24 px</span>
+      <span class="row__bar"><div style="width:24px;"></div></span>
+      <span class="row__role">Section padding · card body inset</span>
+    </div>
+    <div class="row">
+      <span class="row__token">space-6</span>
+      <span class="row__px">32 px</span>
+      <span class="row__bar"><div style="width:32px;"></div></span>
+      <span class="row__role">Page gutters · row spacing</span>
+    </div>
+    <div class="row">
+      <span class="row__token">space-7</span>
+      <span class="row__px">48 px</span>
+      <span class="row__bar"><div style="width:48px;"></div></span>
+      <span class="row__role">Section break · before / after</span>
+    </div>
+    <div class="row">
+      <span class="row__token">space-8</span>
+      <span class="row__px">64 px</span>
+      <span class="row__bar"><div style="width:64px;"></div></span>
+      <span class="row__role">Hero padding · marketing rhythm</span>
+    </div>
+    <div class="row">
+      <span class="row__token">space-9</span>
+      <span class="row__px">96 px</span>
+      <span class="row__bar"><div style="width:96px;background:var(--pwh-primary);"></div></span>
+      <span class="row__role">Full section divide · landing</span>
+    </div>
+    <div class="row">
+      <span class="row__token">space-10</span>
+      <span class="row__px">128 px</span>
+      <span class="row__bar"><div style="width:128px;background:var(--pwh-primary);"></div></span>
+      <span class="row__role">Outer page margin · marketing pad</span>
+    </div>
+    <div class="row">
+      <span class="row__token">space-11</span>
+      <span class="row__px">192 px</span>
+      <span class="row__bar" style="grid-column:3 / 5;"><div style="width:192px;background:var(--pwh-primary);"></div></span>
+    </div>
+  </div>
+
+  <div style="margin-top:18px;padding:14px 16px;background:var(--pwh-bg);border-left:3px solid var(--pwh-accent);font-size:13.5px;color:var(--pwh-fg-2);line-height:1.55;">
+    <b style="color:var(--pwh-primary);">Rule of thumb:</b> never let a label touch its container — minimum <span style="font-family:var(--pwh-font-mono);color:var(--pwh-primary);font-weight:700;">space-2</span> (8 px) on small chips, <span style="font-family:var(--pwh-font-mono);color:var(--pwh-primary);font-weight:700;">space-4</span> (16 px) on cards.
+  </div>
+</div>
+</body></html>

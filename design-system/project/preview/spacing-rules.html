@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Rules & Dividers</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  .rule-row { display: flex; flex-direction: column; gap: 8px; }
+  .rule-row__caption {
+    font-size: 13.5px;
+    color: var(--pwh-fg-2);
+    line-height: 1.5;
+  }
+  .rule-row__caption b {
+    color: var(--pwh-primary);
+    font-weight: 700;
+  }
+  .rule-row__token {
+    font-family: var(--pwh-font-mono);
+    font-size: 12px;
+    color: var(--pwh-secondary);
+  }
+</style>
+</head>
+<body>
+<div class="card" style="padding:26px 28px;gap:22px;">
+  <div class="eyebrow" style="font-size:12px;">RULES &amp; DIVIDERS</div>
+
+  <div class="rule-row">
+    <div style="font-family:var(--pwh-font-display);font-size:28px;color:var(--pwh-primary);line-height:1;">Section Title</div>
+    <div style="height:1px;background:var(--pwh-accent);width:80px;"></div>
+    <div class="rule-row__caption">
+      <b>Gold rule</b> · <span class="rule-row__token">--pwh-rule-gold</span> — under section titles, slide titles, page heads.
+    </div>
+  </div>
+
+  <div class="rule-row">
+    <div style="height:1px;background:var(--pwh-gray);"></div>
+    <div class="rule-row__caption">
+      <b>Hairline</b> · <span class="rule-row__token">--pwh-rule-hair</span> — table rows, list dividers (warm gray).
+    </div>
+  </div>
+
+  <div class="rule-row">
+    <div style="height:1px;background:var(--pwh-secondary);"></div>
+    <div class="rule-row__caption">
+      <b>Teal medium</b> · <span class="rule-row__token">--pwh-rule-teal</span> — under column headers in tables.
+    </div>
+  </div>
+
+  <div class="rule-row">
+    <div style="border-bottom:3px double var(--pwh-primary);"></div>
+    <div class="rule-row__caption">
+      <b>Double primary</b> · <span class="rule-row__token">3px double primary</span> — total rows, sheet-style emphasis.
+    </div>
+  </div>
+
+  <div class="rule-row">
+    <div style="height:6px;background:var(--pwh-accent);"></div>
+    <div class="rule-row__caption">
+      <b>Accent strip</b> · <span class="rule-row__token">6px solid accent</span> — row 1 of every spreadsheet tab; tops every KPI card.
+    </div>
+  </div>
+</div>
+</body></html>

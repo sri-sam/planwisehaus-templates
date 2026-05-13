@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Primary Palette</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  .palette { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .group { display: flex; flex-direction: column; gap: 8px; }
+  .group__main {
+    height: 78px;
+    border-radius: 6px;
+    padding: 8px 12px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    color: #fff;
+  }
+  .group__main--gold { color: #3a2d05; }
+  .group__name {
+    font-family: var(--pwh-font-body);
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.06em;
+  }
+  .group__hex { font-family: var(--pwh-font-mono); font-size: 10px; opacity: 0.85; }
+  .group__role { font-size: 10px; line-height: 1.35; color: var(--pwh-fg-3); }
+
+  .ramp { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-radius: 4px; overflow: hidden; }
+  .ramp__step {
+    height: 26px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--pwh-font-mono); font-size: 8.5px;
+    color: var(--pwh-fg-3);
+  }
+  .ramp__step--dark { color: rgba(255,255,255,0.85); }
+</style>
+</head>
+<body>
+<div class="card" style="gap:14px;">
+  <div class="eyebrow">PRIMARY PALETTE — CORE + SOFT TINTS</div>
+
+  <div class="palette">
+    <!-- Primary teal -->
+    <div class="group">
+      <div class="group__main" style="background:#2C5F5A;">
+        <div class="group__name">PRIMARY</div>
+        <div class="group__hex">#2C5F5A</div>
+      </div>
+      <div class="ramp">
+        <div class="ramp__step ramp__step--dark" style="background:#2C5F5A;">600</div>
+        <div class="ramp__step ramp__step--dark" style="background:#4F807B;">400</div>
+        <div class="ramp__step" style="background:#A8C2BF;">200</div>
+        <div class="ramp__step" style="background:#E0F0EE;">50</div>
+      </div>
+      <div class="group__role">Dark teal-green. Titles, nav text, tab color. Softer tints carry it into card fills and soft hovers.</div>
+    </div>
+
+    <!-- Secondary teal -->
+    <div class="group">
+      <div class="group__main" style="background:#3D8A85;">
+        <div class="group__name">SECONDARY</div>
+        <div class="group__hex">#3D8A85</div>
+      </div>
+      <div class="ramp">
+        <div class="ramp__step ramp__step--dark" style="background:#3D8A85;">600</div>
+        <div class="ramp__step ramp__step--dark" style="background:#6FA9A5;">400</div>
+        <div class="ramp__step" style="background:#B6D5D2;">200</div>
+        <div class="ramp__step" style="background:#EAF5F3;">50</div>
+      </div>
+      <div class="group__role">Medium teal. Section headers, active nav. Lighter steps for chart accents and quiet badges.</div>
+    </div>
+
+    <!-- Accent gold -->
+    <div class="group">
+      <div class="group__main group__main--gold" style="background:#C9A845;">
+        <div class="group__name">ACCENT</div>
+        <div class="group__hex">#C9A845</div>
+      </div>
+      <div class="ramp">
+        <div class="ramp__step ramp__step--dark" style="background:#9B7E2C;">700</div>
+        <div class="ramp__step" style="background:#C9A845;">500</div>
+        <div class="ramp__step" style="background:#E5D49A;">200</div>
+        <div class="ramp__step" style="background:#FFFDE8;">50</div>
+      </div>
+      <div class="group__role">Warm gold. KPI tops, input borders, dividers. Softens to pale wheat for input fill.</div>
+    </div>
+  </div>
+
+  <!-- Soft companion row -->
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+    <div class="eyebrow" style="color:var(--pwh-fg-3);">SOFT COMPANIONS — USE TO LIGHTEN A LAYOUT</div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;">
+      <div style="display:flex;flex-direction:column;gap:4px;"><div style="height:38px;background:#F4F1E8;border-radius:4px;border:1px solid rgba(0,0,0,0.04);"></div><div style="font-family:var(--pwh-font-mono);font-size:10px;color:var(--pwh-fg-3);">Soft Cream<br>#F4F1E8</div></div>
+      <div style="display:flex;flex-direction:column;gap:4px;"><div style="height:38px;background:#E0F0EE;border-radius:4px;"></div><div style="font-family:var(--pwh-font-mono);font-size:10px;color:var(--pwh-fg-3);">Soft Mint<br>#E0F0EE</div></div>
+      <div style="display:flex;flex-direction:column;gap:4px;"><div style="height:38px;background:#D9E8E4;border-radius:4px;"></div><div style="font-family:var(--pwh-font-mono);font-size:10px;color:var(--pwh-fg-3);">Soft Sage<br>#D9E8E4</div></div>
+      <div style="display:flex;flex-direction:column;gap:4px;"><div style="height:38px;background:#F5E9C8;border-radius:4px;"></div><div style="font-family:var(--pwh-font-mono);font-size:10px;color:var(--pwh-fg-3);">Soft Wheat<br>#F5E9C8</div></div>
+      <div style="display:flex;flex-direction:column;gap:4px;"><div style="height:38px;background:#EFE5D6;border-radius:4px;"></div><div style="font-family:var(--pwh-font-mono);font-size:10px;color:var(--pwh-fg-3);">Soft Linen<br>#EFE5D6</div></div>
+    </div>
+  </div>
+</div>
+</body></html>

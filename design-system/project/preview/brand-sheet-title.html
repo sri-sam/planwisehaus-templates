@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Sheet Title Pattern</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  .sheet-mock {
+    background: var(--pwh-bg);
+    border: 1px solid var(--pwh-gray);
+    overflow: hidden;
+    box-shadow: var(--pwh-shadow-2);
+  }
+  .sheet-mock__strip { height: 6px; background: var(--pwh-accent); }
+  .sheet-mock__head  {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    padding: 18px 28px 14px;
+    border-bottom: 1px solid var(--pwh-accent);
+    background: linear-gradient(180deg, #F4F1E8 0%, var(--pwh-bg) 100%);
+  }
+  .sheet-mock__lockup { display: flex; flex-direction: column; gap: 4px; }
+  .sheet-mock__brand {
+    font-family: var(--pwh-font-display);
+    font-weight: 500;
+    font-size: 30px;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .sheet-mock__brand .a { color: var(--pwh-primary); }
+  .sheet-mock__brand .dot { color: var(--pwh-accent); margin: 0 6px; }
+  .sheet-mock__brand .b { color: var(--pwh-secondary); font-style: italic; font-weight: 500; }
+  .sheet-mock__tag {
+    font-family: var(--pwh-font-display);
+    font-style: italic;
+    font-size: 12px;
+    color: var(--pwh-fg-3);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .sheet-mock__meta {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
+    font-family: var(--pwh-font-body);
+  }
+  .sheet-mock__meta .yr {
+    font-family: var(--pwh-font-display);
+    font-weight: 600;
+    font-size: 26px;
+    color: var(--pwh-primary);
+    letter-spacing: 0.06em;
+    line-height: 1;
+  }
+  .sheet-mock__meta .lab {
+    font-size: 9px; color: var(--pwh-fg-3);
+    letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .sheet-mock__body {
+    padding: 14px 28px 22px;
+    display: flex; align-items: center; justify-content: space-between; gap: 18px;
+  }
+  .sheet-mock__crumbs {
+    font-family: var(--pwh-font-body);
+    font-size: 10px;
+    color: var(--pwh-fg-3);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .sheet-mock__crumbs .here { color: var(--pwh-secondary); font-weight: 700; }
+  .sheet-mock__cite {
+    background: #fff;
+    border-left: 3px solid var(--pwh-accent);
+    padding: 6px 10px;
+    font-family: var(--pwh-font-mono);
+    font-size: 10.5px;
+    color: var(--pwh-fg-2);
+  }
+  .anatomy {
+    display: grid; grid-template-columns: 14px 1fr;
+    gap: 6px 10px;
+    font-size: 10.5px; color: var(--pwh-fg-3);
+    line-height: 1.45;
+  }
+  .anatomy .pin {
+    font-family: var(--pwh-font-mono);
+    color: #fff; background: var(--pwh-secondary);
+    text-align: center; border-radius: 2px;
+    font-size: 9px; font-weight: 700; padding-top: 2px;
+  }
+</style>
+</head>
+<body>
+<div class="card" style="padding:24px 28px;gap:14px;">
+  <div class="eyebrow">SHEET TITLE PATTERN — APPLIED TO EVERY TAB</div>
+
+  <div class="sheet-mock">
+    <div class="sheet-mock__strip"></div>
+    <div class="sheet-mock__head">
+      <div class="sheet-mock__lockup">
+        <div class="sheet-mock__brand">
+          <span class="a">Planwise</span><span class="dot">·</span><span class="b">Dashboard</span>
+        </div>
+        <div class="sheet-mock__tag">Excel Templates for Life &amp; Home</div>
+      </div>
+      <div class="sheet-mock__meta">
+        <div class="yr">2025</div>
+        <div class="lab">Annual Budget</div>
+      </div>
+    </div>
+    <div class="sheet-mock__body">
+      <div class="sheet-mock__crumbs">Overview &nbsp;›&nbsp; <span class="here">Dashboard</span></div>
+      <div class="sheet-mock__cite">D2 · pwh_title &nbsp;|&nbsp; D3 · pwh_subtitle</div>
+    </div>
+  </div>
+
+  <div class="anatomy">
+    <div class="pin">1</div><div><b style="color:var(--pwh-fg-1);">Gold accent strip</b> — 5px high, full width, row 1 of every sheet.</div>
+    <div class="pin">2</div><div><b style="color:var(--pwh-fg-1);">Brand · tab name</b> in Cormorant Garamond 30px small-caps; tab name in italic secondary teal.</div>
+    <div class="pin">3</div><div><b style="color:var(--pwh-fg-1);">Italic small-caps tagline</b> — fixed "Excel Templates for Life &amp; Home".</div>
+    <div class="pin">4</div><div><b style="color:var(--pwh-fg-1);">Right-aligned year + product label</b> anchors the lockup and surfaces the workbook context.</div>
+    <div class="pin">5</div><div><b style="color:var(--pwh-fg-1);">Hairline gold rule + breadcrumb</b> separates the head from the canvas without a heavy border.</div>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Section & Column Headers</title>
+<link rel="stylesheet" href="_card.css">
+</head>
+<body>
+<div class="card" style="background:var(--pwh-bg);padding:26px 28px;gap:14px;">
+  <div class="eyebrow" style="font-size:12px;">SECTION + COLUMN HEADER PAIRING</div>
+  <div style="background:#fff;overflow:hidden;">
+    <div style="background:var(--pwh-primary);color:#fff;font-size:15px;font-weight:700;padding:12px 18px;letter-spacing:0.08em;text-transform:uppercase;">Monthly Expenses</div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;background:var(--pwh-lt-teal);border-bottom:2px solid var(--pwh-secondary);font-size:13px;font-weight:700;color:var(--pwh-primary);text-transform:uppercase;letter-spacing:0.07em;">
+      <div style="padding:10px 16px;">Category</div>
+      <div style="padding:10px 16px;text-align:right;">Budget</div>
+      <div style="padding:10px 16px;text-align:right;">Actual</div>
+      <div style="padding:10px 16px;text-align:right;">% Used</div>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;font-size:15px;color:var(--pwh-fg-1);border-bottom:1px solid var(--pwh-gray);">
+      <div style="padding:10px 16px;">Housing</div>
+      <div style="padding:10px 16px;text-align:right;font-family:var(--pwh-font-mono);">$1,450</div>
+      <div style="padding:10px 16px;text-align:right;font-family:var(--pwh-font-mono);">$1,478</div>
+      <div style="padding:10px 16px;text-align:right;font-family:var(--pwh-font-mono);color:var(--pwh-danger);font-weight:700;">102%</div>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;font-size:15px;color:var(--pwh-fg-1);background:var(--pwh-lt-teal-2);">
+      <div style="padding:10px 16px;">Groceries</div>
+      <div style="padding:10px 16px;text-align:right;font-family:var(--pwh-font-mono);">$500</div>
+      <div style="padding:10px 16px;text-align:right;font-family:var(--pwh-font-mono);">$478</div>
+      <div style="padding:10px 16px;text-align:right;font-family:var(--pwh-font-mono);">96%</div>
+    </div>
+  </div>
+  <div style="font-size:13px;color:var(--pwh-fg-3);line-height:1.5;">
+    <b style="color:var(--pwh-primary);">Section header:</b> 15 px / 700, white on primary teal. <b style="color:var(--pwh-primary);">Column header:</b> 13 px / 700, primary on light teal, 2 px teal underline.
+  </div>
+</div>
+</body></html>
