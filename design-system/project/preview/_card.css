@@ -1,0 +1,68 @@
+/* Base card frame used by every preview card. */
+@import url('../colors_and_type.css');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 700px;
+  min-height: 100%;
+  font-family: var(--pwh-font-body);
+  color: var(--pwh-fg-1);
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.card {
+  width: 700px;
+  background: #ffffff;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.card--cream  { background: var(--pwh-bg); }
+.card--paper  { background: var(--pwh-sidebar); }
+.card--brand  { background: var(--pwh-primary); color: #fff; }
+
+.row { display: flex; align-items: center; gap: 12px; }
+.col { display: flex; flex-direction: column; gap: 8px; }
+.grid { display: grid; gap: 12px; }
+
+.eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pwh-fg-4);
+}
+.mono { font-family: var(--pwh-font-mono); font-size: 12px; }
+
+/* Common swatch primitive */
+.swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.swatch__chip {
+  height: 64px;
+  border-radius: 4px;
+  border: 1px solid rgba(31, 61, 58, 0.06);
+}
+.swatch__label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--pwh-fg-1);
+}
+.swatch__hex {
+  font-family: var(--pwh-font-mono);
+  font-size: 10.5px;
+  color: var(--pwh-fg-3);
+  text-transform: uppercase;
+}
+.swatch__role {
+  font-size: 10px;
+  color: var(--pwh-fg-3);
+  line-height: 1.4;
+}

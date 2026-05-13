@@ -1,0 +1,257 @@
+/* Spreadsheet UI Kit — recreates the look of a PlanWiseHaus Excel template
+   in the browser. Sized at a fixed 1280px design width so it lines up with
+   the index.html viewport. */
+@import url('../../colors_and_type.css');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: var(--pwh-font-body);
+  color: var(--pwh-fg-1);
+  background: #d6d2c8;
+  font-size: 14px;
+}
+
+.workbook {
+  width: 1280px;
+  margin: 24px auto;
+  background: var(--pwh-bg);
+  box-shadow: var(--pwh-shadow-3);
+  overflow: hidden;
+}
+
+/* Gold accent strip on row 1 */
+.accent-strip { height: 6px; background: var(--pwh-accent); }
+
+/* Title block */
+.title-block {
+  padding: 14px 24px 12px 200px;
+  background: var(--pwh-bg);
+}
+.title-block__title {
+  font-family: var(--pwh-font-body);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--pwh-primary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.title-block__title .tab { color: var(--pwh-secondary); }
+.title-block__subtitle {
+  font-family: var(--pwh-font-body);
+  font-style: italic;
+  font-size: 10px;
+  color: var(--pwh-fg-3);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* The two-column body — sidebar + canvas */
+.sheet-body { display: flex; min-height: 720px; }
+
+/* Sidebar */
+.sidebar {
+  width: 176px;
+  background: var(--pwh-sidebar);
+  padding: 12px 12px 24px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--pwh-gray);
+}
+.sidebar__brand {
+  font-family: var(--pwh-font-body);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--pwh-primary);
+  letter-spacing: 0.14em;
+  padding: 4px 6px 14px;
+}
+.sidebar__section {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--pwh-fg-4);
+  letter-spacing: 0.12em;
+  padding: 10px 6px 4px;
+  text-transform: uppercase;
+}
+.sidebar__link {
+  display: block;
+  padding: 4px 6px;
+  font-size: 11px;
+  color: var(--pwh-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+.sidebar__link:hover { background: rgba(61, 138, 133, 0.12); }
+.sidebar__link.is-active {
+  font-weight: 700;
+  color: #fff;
+  background: var(--pwh-secondary);
+  text-decoration: none;
+}
+
+/* Canvas */
+.canvas {
+  flex: 1;
+  padding: 16px 28px 32px;
+  background: var(--pwh-bg);
+}
+
+/* KPI grid */
+.kpi-grid { display: grid; gap: 12px; }
+.kpi {
+  background: var(--pwh-lt-teal);
+  overflow: hidden;
+}
+.kpi__strip { height: 5px; background: var(--pwh-accent); }
+.kpi__value {
+  text-align: center;
+  padding: 14px 8px 4px;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--pwh-primary);
+}
+.kpi__value--success { color: var(--pwh-success); }
+.kpi__value--danger  { color: var(--pwh-danger); }
+.kpi__label {
+  text-align: center;
+  padding: 0 8px 14px;
+  font-size: 9px;
+  font-weight: 700;
+  color: #888;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Section header band */
+.section-header {
+  background: var(--pwh-primary);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 8px 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 18px;
+}
+
+/* Data table */
+.dt { background: #fff; font-family: var(--pwh-font-body); }
+.dt__head, .dt__row { display: grid; }
+.dt__head {
+  background: var(--pwh-lt-teal);
+  border-bottom: 2px solid var(--pwh-secondary);
+}
+.dt__head > div {
+  padding: 7px 12px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--pwh-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.dt__row { border-bottom: 1px solid var(--pwh-gray); font-size: 13px; color: var(--pwh-fg-1); }
+.dt__row:nth-child(even) { background: var(--pwh-lt-teal-2); }
+.dt__row > div { padding: 7px 12px; }
+.dt__row .num { font-family: var(--pwh-font-mono); text-align: right; }
+.dt__row.is-over { background: #FFE4E0; color: var(--pwh-danger); font-weight: 700; }
+.dt__row .bar { position: relative; padding-right: 12px; }
+.dt__row .bar__track {
+  height: 12px; background: #F2EFE7; border-radius: 2px; overflow: hidden;
+}
+.dt__row .bar__fill { height: 100%; background: var(--pwh-secondary); }
+.dt__row .bar__fill--warn   { background: var(--pwh-accent); }
+.dt__row .bar__fill--danger { background: var(--pwh-danger); }
+.dt__row.is-total {
+  background: var(--pwh-lt-teal);
+  font-weight: 700;
+  color: var(--pwh-primary);
+  border-top: 2px solid var(--pwh-secondary);
+  border-bottom: 3px double var(--pwh-primary);
+}
+
+/* Input cell */
+.input-cell {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.input-cell__label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--pwh-primary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.input-cell__field {
+  background: var(--pwh-input);
+  border: none;
+  border-bottom: 1.5px solid var(--pwh-accent);
+  padding: 8px 10px;
+  font-family: var(--pwh-font-body);
+  font-size: 13px;
+  color: var(--pwh-fg-1);
+  width: 100%;
+}
+.input-cell__field--mono { font-family: var(--pwh-font-mono); }
+
+/* Status pills */
+.pill {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 2px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.pill--paid     { background: #C8E6C9; color: #2E7D52; }
+.pill--pending  { background: #FFF9C4; color: #7A6A1B; }
+.pill--overdue  { background: #FFCDD2; color: #B71C1C; }
+.pill--ontrack  { background: #C8E6C9; color: #2E7D52; }
+.pill--overbudg { background: #FFCDD2; color: #B71C1C; }
+
+/* Tab strip */
+.tab-strip {
+  display: flex;
+  align-items: flex-end;
+  gap: 1px;
+  background: var(--pwh-bg);
+  padding: 8px 24px 0;
+  border-bottom: 2px solid var(--pwh-primary);
+}
+.tab-strip__tab {
+  background: var(--pwh-primary);
+  color: #fff;
+  padding: 6px 16px;
+  font-size: 11px;
+  font-weight: 500;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  cursor: pointer;
+  font-family: var(--pwh-font-body);
+}
+.tab-strip__tab.is-active {
+  background: #fff;
+  color: var(--pwh-primary);
+  font-weight: 700;
+  border: 1px solid var(--pwh-primary);
+  border-bottom: 2px solid #fff;
+  position: relative;
+  top: 2px;
+}
+
+/* Two-column layout helpers */
+.two-col { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; }
+
+/* Chart frames */
+.chart {
+  background: #fff;
+  padding: 14px 16px 18px;
+}
+.chart__title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--pwh-primary);
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}

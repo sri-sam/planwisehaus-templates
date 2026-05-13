@@ -1,0 +1,204 @@
+/* =============================================================
+   PlanWiseHaus Design System — Colors & Typography
+   "Excel Templates for Life & Home"
+   ============================================================= */
+
+/* ---------- Fonts (Google Fonts substitutions) ----------------
+   Display serif: Cormorant Garamond — matches the elegant
+   transitional serif used in the Etsy banner wordmark.
+   UI / body sans: Carlito — Google's metric-compatible twin of
+   Calibri, the native font of every Excel template. Falls back
+   to Calibri on Windows where it's installed system-wide.
+   Mono: JetBrains Mono — for spreadsheet-like numeric/code blocks.
+   ------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Carlito:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* ---------- BRAND COLORS (canonical, never substitute) ---- */
+  --pwh-primary:    #2C5F5A;   /* dark teal-green: titles, nav text     */
+  --pwh-secondary:  #3D8A85;   /* medium teal: section hdrs, active nav */
+  --pwh-accent:     #C9A845;   /* gold/amber: KPI tops, input borders   */
+
+  --pwh-bg:         #EDEAE2;   /* warm cream: page/sheet background     */
+  --pwh-sidebar:    #F5F2EC;   /* lighter cream: nav sidebar            */
+  --pwh-data:       #FFFFFF;   /* pure white: data cell fill            */
+  --pwh-lt-teal:    #E0F0EE;   /* light teal: zebra rows, KPI fill      */
+  --pwh-lt-teal-2:  #F0FAF8;   /* lighter alt zebra row                 */
+  --pwh-input:      #FFFDE8;   /* pale yellow: user input cells         */
+  --pwh-gray:       #DDD9D0;   /* warm gray: borders, dividers          */
+
+  --pwh-success:    #2E7D52;   /* green: on-budget, surplus             */
+  --pwh-warning:    #FFF9C4;   /* soft yellow: 85–100% threshold        */
+  --pwh-danger:     #C0392B;   /* red: over-budget, deficit             */
+  --pwh-success-bg: #C8E6C9;   /* pale green fill                       */
+  --pwh-danger-bg:  #FFCDD2;   /* pale red fill                         */
+
+  /* ---------- TEXT FOREGROUND (semantic) -------------------- */
+  --pwh-fg-1:       #1F3D3A;   /* primary text — almost-black teal      */
+  --pwh-fg-2:       #4A4A4A;   /* secondary text                        */
+  --pwh-fg-3:       #777777;   /* tertiary / subtitle / muted           */
+  --pwh-fg-4:       #999999;   /* nav section labels                    */
+  --pwh-fg-onbrand: #FFFFFF;   /* text on dark teal                     */
+
+  /* ---------- TYPE TOKENS ----------------------------------- */
+  --pwh-font-display: 'Cormorant Garamond', 'EB Garamond', 'Times New Roman', serif;
+  --pwh-font-body:    'Carlito', 'Calibri', 'Segoe UI', system-ui, sans-serif;
+  --pwh-font-mono:    'JetBrains Mono', 'Consolas', 'SF Mono', monospace;
+
+  --pwh-text-xs:   11px;   /* nav section labels, captions             */
+  --pwh-text-sm:   13px;   /* nav links, small body                    */
+  --pwh-text-base: 15px;   /* body                                     */
+  --pwh-text-md:   17px;   /* lead paragraphs                          */
+  --pwh-text-lg:   22px;   /* h3 / subheads                            */
+  --pwh-text-xl:   32px;   /* h2 / KPI values                          */
+  --pwh-text-2xl:  44px;   /* h1 / sheet titles                        */
+  --pwh-text-display: 64px;/* hero / banner wordmark                   */
+
+  --pwh-leading-tight: 1.15;
+  --pwh-leading-snug:  1.35;
+  --pwh-leading-body:  1.55;
+
+  --pwh-tracking-tight:  -0.01em;
+  --pwh-tracking-normal: 0;
+  --pwh-tracking-wide:   0.08em;   /* small caps / eyebrow labels      */
+  --pwh-tracking-wider:  0.18em;   /* tagline, sheet title             */
+
+  /* ---------- SHAPE & ELEVATION ----------------------------- */
+  --pwh-radius-xs: 2px;    /* spreadsheet-tight corners */
+  --pwh-radius-sm: 4px;
+  --pwh-radius-md: 8px;
+  --pwh-radius-lg: 14px;
+  --pwh-radius-pill: 999px;
+
+  --pwh-shadow-1: 0 1px 0 rgba(31, 61, 58, 0.04), 0 1px 2px rgba(31, 61, 58, 0.06);
+  --pwh-shadow-2: 0 2px 4px rgba(31, 61, 58, 0.06), 0 8px 16px -8px rgba(31, 61, 58, 0.12);
+  --pwh-shadow-3: 0 4px 8px rgba(31, 61, 58, 0.08), 0 24px 48px -12px rgba(31, 61, 58, 0.18);
+
+  /* Signature: thin gold underline used under section headers */
+  --pwh-rule-gold: 1px solid var(--pwh-accent);
+  --pwh-rule-teal: 1px solid var(--pwh-secondary);
+  --pwh-rule-hair: 1px solid var(--pwh-gray);
+
+  /* ---------- SPACING (4px base) ---------------------------- */
+  --pwh-space-1:  4px;
+  --pwh-space-2:  8px;
+  --pwh-space-3:  12px;
+  --pwh-space-4:  16px;
+  --pwh-space-5:  24px;
+  --pwh-space-6:  32px;
+  --pwh-space-7:  48px;
+  --pwh-space-8:  64px;
+  --pwh-space-9:  96px;
+}
+
+/* =============================================================
+   SEMANTIC ELEMENT STYLES
+   ============================================================= */
+.pwh-body {
+  font-family: var(--pwh-font-body);
+  font-size: var(--pwh-text-base);
+  line-height: var(--pwh-leading-body);
+  color: var(--pwh-fg-1);
+  background: var(--pwh-bg);
+}
+
+/* The signature sheet-title pattern: "PLANWISE HAUS · TAB NAME"
+   Renders the brand in primary teal, the tab name in secondary teal. */
+.pwh-sheet-title {
+  font-family: var(--pwh-font-body);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--pwh-primary);
+  letter-spacing: var(--pwh-tracking-wide);
+  text-transform: uppercase;
+}
+.pwh-sheet-title__tab { color: var(--pwh-secondary); }
+
+.pwh-subtitle {
+  font-family: var(--pwh-font-body);
+  font-size: 10px;
+  font-style: italic;
+  color: var(--pwh-fg-3);
+  letter-spacing: var(--pwh-tracking-wide);
+  text-transform: uppercase;
+}
+
+/* Display serif — used on banner, slide titles, landing heroes */
+.pwh-display {
+  font-family: var(--pwh-font-display);
+  font-weight: 500;
+  font-size: var(--pwh-text-display);
+  line-height: var(--pwh-leading-tight);
+  letter-spacing: var(--pwh-tracking-wider);
+  color: var(--pwh-primary);
+  text-transform: uppercase;
+}
+.pwh-display__accent { color: var(--pwh-secondary); }
+
+.pwh-h1 {
+  font-family: var(--pwh-font-display);
+  font-weight: 500;
+  font-size: var(--pwh-text-2xl);
+  line-height: var(--pwh-leading-tight);
+  letter-spacing: var(--pwh-tracking-tight);
+  color: var(--pwh-primary);
+}
+.pwh-h2 {
+  font-family: var(--pwh-font-display);
+  font-weight: 500;
+  font-size: var(--pwh-text-xl);
+  line-height: var(--pwh-leading-snug);
+  color: var(--pwh-primary);
+}
+.pwh-h3 {
+  font-family: var(--pwh-font-body);
+  font-weight: 700;
+  font-size: var(--pwh-text-lg);
+  line-height: var(--pwh-leading-snug);
+  color: var(--pwh-primary);
+}
+.pwh-section-header {
+  font-family: var(--pwh-font-body);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: var(--pwh-tracking-wide);
+  text-transform: uppercase;
+  color: var(--pwh-fg-onbrand);
+  background: var(--pwh-primary);
+  padding: 6px 12px;
+}
+.pwh-eyebrow {
+  font-family: var(--pwh-font-body);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: var(--pwh-tracking-wide);
+  text-transform: uppercase;
+  color: var(--pwh-fg-4);
+}
+
+.pwh-p {
+  font-family: var(--pwh-font-body);
+  font-size: var(--pwh-text-base);
+  line-height: var(--pwh-leading-body);
+  color: var(--pwh-fg-2);
+}
+.pwh-lead {
+  font-family: var(--pwh-font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--pwh-text-md);
+  line-height: var(--pwh-leading-snug);
+  color: var(--pwh-fg-2);
+}
+.pwh-small  { font-size: var(--pwh-text-sm); color: var(--pwh-fg-3); }
+.pwh-mono   { font-family: var(--pwh-font-mono); font-size: 13px; color: var(--pwh-fg-1); }
+
+/* The tagline lockup */
+.pwh-tagline {
+  font-family: var(--pwh-font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 20px;
+  color: var(--pwh-fg-3);
+  letter-spacing: 0;
+}
