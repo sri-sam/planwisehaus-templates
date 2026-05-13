@@ -1,0 +1,32 @@
+# Node.js
+node_modules/
+npm-debug.log*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build artifacts in root (organized copies live in templates/)
+/build_budget.py
+/build_budget.js
+/package.json
+/package-lock.json
+/PlanWiseHaus_Annual_Budget_2025.xlsx
+
+# Personal / internal files
+MOVE FILE HERE.bat
+*.html
+Simple Budget Planner.xlsx
+
+# Brand source files in root (organized copies live in brand/)
+image.jpg
+PlanWiseHaus_Etsy_Banner.png
