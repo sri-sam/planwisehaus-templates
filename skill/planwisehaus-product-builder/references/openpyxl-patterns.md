@@ -276,7 +276,8 @@ chart = DoughnutChart()
 style_chart(chart, 'Distribution Title', 'donut')
 ```
 
-**Important**: Put chart source data in a hidden area (rows 70+, cols A–E) of the Dashboard tab.
+**Important**: Put chart source data in a hidden area (rows 130+, cols A–E) of the Dashboard tab.
+Must be below the summary table (typically ends by row 80) AND below the sidebar fill range (rows 1–120).
 Fill with formulas referencing other tabs. Never hardcode chart data.
 
 ### Chart Sizing & Overlap Rules

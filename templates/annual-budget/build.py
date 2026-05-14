@@ -1127,8 +1127,9 @@ def build_dashboard(wb):
 
     ws.row_dimensions[16].height = 14
 
-    # ── Chart data (hidden area, rows 70+) ──
-    CD = 70  # chart data start row
+    # ── Chart data (hidden area, rows 130+) ──
+    # Must be below summary table (ends row 75) and sidebar fill range (rows 1-120)
+    CD = 130  # income/expenses/savings: rows 130-142
 
     # Income / Expenses / Savings by month
     ws.cell(row=CD, column=1).value = 'Month'
@@ -1143,7 +1144,7 @@ def build_dashboard(wb):
         ws.cell(row=r, column=4).value = f"='ANNUAL TOTALS'!G{7+i}"
 
     # Category totals
-    CAT_D = 90
+    CAT_D = 150  # categories: rows 150-165
     ws.cell(row=CAT_D, column=1).value = 'Category'
     ws.cell(row=CAT_D, column=2).value = 'Annual Total'
     ann_col = get_column_letter(4 + 1 + len(MONTHS))
@@ -1192,7 +1193,7 @@ def build_dashboard(wb):
     # ── Chart 4: Line — Cumulative Savings ──
     chart4 = LineChart()
     style_chart(chart4, 'Cumulative Savings This Year', 'line')
-    RUN_D = 110
+    RUN_D = 175  # cumulative savings: rows 175-187
     ws.cell(row=RUN_D, column=1).value = 'Month'
     ws.cell(row=RUN_D, column=2).value = 'Cumulative'
     for i in range(12):
