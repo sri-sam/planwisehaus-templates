@@ -161,6 +161,13 @@ def add_sidebar(ws, active_tab, all_tabs):
             cb.value = link
             cb.hyperlink = f"#'{link}'!D2"
             cb.style = 'pwh_nav_active' if link == active_tab else 'pwh_nav_link'
+    # Right border — design system spec: border-right: 1px solid gray
+    # Apply AFTER nav styles so the border isn't overwritten by named styles
+    sep = Side(style='thin', color=C['gray'])
+    for r in range(1, 121):
+        c = ws.cell(row=r, column=2)
+        eb = c.border
+        c.border = Border(left=eb.left, top=eb.top, bottom=eb.bottom, right=sep)
 ```
 
 ---
@@ -257,7 +264,7 @@ cats = Reference(ws, min_col=1, min_row=DATA_START+1, max_row=DATA_START+N)
 data = Reference(ws, min_col=2, max_col=3, min_row=DATA_START, max_row=DATA_START+N)
 chart.add_data(data, titles_from_data=True)
 chart.set_categories(cats)
-chart.width = 18; chart.height = 12
+chart.width = 18; chart.height = 10
 ws.add_chart(chart, 'D18')   # anchor cell
 
 # Line chart
@@ -269,8 +276,37 @@ chart = DoughnutChart()
 style_chart(chart, 'Distribution Title', 'donut')
 ```
 
-**Important**: Put chart source data in a hidden area (rows 60+, cols A–E) of the Dashboard tab.
+**Important**: Put chart source data in a hidden area (rows 70+, cols A–E) of the Dashboard tab.
 Fill with formulas referencing other tabs. Never hardcode chart data.
+
+### Chart Sizing & Overlap Rules
+
+openpyxl chart dimensions are in **centimeters**. Default row height = 16pt = 0.565cm/row.
+
+| Chart height | Rows spanned | Safe next-section gap |
+|---|---|---|
+| 10cm | ~17.7 rows | place next section 2+ rows below |
+| 12cm | ~21.3 rows | place next section 2+ rows below |
+| 14cm | ~24.8 rows | place next section 2+ rows below |
+
+**Standard two-column layout** (Dashboard, 14 content columns starting at D):
+- Left chart: width=18cm, anchored at D (col 4)
+- Right chart: width=14cm, anchored at M (col 13)
+- 9-column gap from D to M ensures charts don't overlap horizontally
+
+**Standard Dashboard row plan** (prevents overlap):
+```
+Row 5:  Section header — KPI Cards
+Row 6:  KPI row 1 (strip/value/label/spacer = rows 6-9)
+Row 11: KPI row 2 (rows 11-14)
+Row 17: Section header — Charts 1 & 2
+Row 18: Chart 1 (D18, 18×10cm) + Chart 2 (M18, 14×10cm) → clears by row 36
+Row 37: Section header — Charts 3 & 4
+Row 38: Chart 3 (D38, 18×12cm) + Chart 4 (M38, 14×12cm) → clears by row 60
+Row 62: Section header — Summary table
+Row 63: Column headers
+Row 64+: Data rows
+```
 
 ---
 

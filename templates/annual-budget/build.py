@@ -112,7 +112,7 @@ def create_styles(wb):
             alignment=Alignment(vertical='center'),
             border=Border(bottom=Side(style='thin', color=C['gray']))),
         NamedStyle(name='pwh_kpi_val',
-            font=Font(name='Calibri', size=22, bold=True, color=C['primary']),
+            font=Font(name='Calibri', size=24, bold=True, color=C['primary']),
             fill=PatternFill(start_color=C['lt_teal'], fill_type='solid'),
             alignment=Alignment(horizontal='center', vertical='center')),
         NamedStyle(name='pwh_kpi_lbl',
@@ -172,8 +172,9 @@ def setup_sheet(ws, tab_title, active_tab):
     for col in range(1, 51):
         ws.cell(row=1, column=col).fill = acc
     # Title: brand prefix in primary teal, tab name in secondary teal
-    tf_brand = InlineFont(rFont='Calibri', sz=22, b=True, color=C['primary'])
-    tf_tab   = InlineFont(rFont='Calibri', sz=22, b=True, color=C['secondary'])
+    # InlineFont needs full 8-char ARGB (FF prefix = fully opaque)
+    tf_brand = InlineFont(rFont='Calibri', sz=22, b=True, color='FF' + C['primary'])
+    tf_tab   = InlineFont(rFont='Calibri', sz=22, b=True, color='FF' + C['secondary'])
     ws['D2'] = CellRichText(
         TextBlock(tf_brand, 'PLANWISE HAUS  ·  '),
         TextBlock(tf_tab, tab_title),
@@ -203,6 +204,12 @@ def add_sidebar(ws, active_tab):
             cb.value = link
             cb.hyperlink = f"#'{link}'!D2"
             cb.style = 'pwh_nav_active' if link == active_tab else 'pwh_nav_link'
+    # Right border on sidebar column (design system: border-right: 1px solid gray)
+    sep = Side(style='thin', color=C['gray'])
+    for r in range(1, 121):
+        c = ws.cell(row=r, column=2)
+        eb = c.border
+        c.border = Border(left=eb.left, top=eb.top, bottom=eb.bottom, right=sep)
 
 def sec_hdr(ws, row, col, text, span=6):
     ws.merge_cells(start_row=row, start_column=col, end_row=row, end_column=col+span-1)
@@ -1144,6 +1151,11 @@ def build_dashboard(wb):
         ws.cell(row=CAT_D+1+i, column=1).value = cat
         ws.cell(row=CAT_D+1+i, column=2).value = f"='ANNUAL TOTALS'!{ann_col}{23+i}"
 
+    # ── Chart layout math ──────────────────────────────────────────────────────
+    # Default row height = 16pt. 1cm = 28.346pt → 10cm ≈ 17.7 rows, 12cm ≈ 21.3 rows.
+    # Row 18 + 17.7 rows → charts 1&2 clear by row 36.  Sec hdr at 37, charts at 38.
+    # Row 38 + 21.3 rows → charts 3&4 clear by row 59.  Summary hdr at 62.
+
     # ── Chart 1: Clustered Bar — Income vs Expenses ──
     sec_hdr(ws, 17, 4, '  INCOME vs. EXPENSES BY MONTH', 12)
     chart1 = BarChart()
@@ -1154,7 +1166,7 @@ def build_dashboard(wb):
     data1  = Reference(ws, min_col=2, max_col=3, min_row=CD, max_row=CD+12)
     chart1.add_data(data1, titles_from_data=True)
     chart1.set_categories(cats1)
-    chart1.width = 18; chart1.height = 12
+    chart1.width = 18; chart1.height = 10
     ws.add_chart(chart1, 'D18')
 
     # ── Chart 2: Line — Savings Trend ──
@@ -1163,19 +1175,19 @@ def build_dashboard(wb):
     data2 = Reference(ws, min_col=4, max_col=4, min_row=CD, max_row=CD+12)
     chart2.add_data(data2, titles_from_data=True)
     chart2.set_categories(cats1)
-    chart2.width = 14; chart2.height = 12
+    chart2.width = 14; chart2.height = 10
     ws.add_chart(chart2, 'M18')
 
     # ── Chart 3: Donut — Expense by Category ──
-    sec_hdr(ws, 33, 4, '  EXPENSE DISTRIBUTION', 12)
+    sec_hdr(ws, 37, 4, '  EXPENSE DISTRIBUTION', 12)
     chart3 = DoughnutChart()
     style_chart(chart3, 'Annual Expense by Category', 'donut')
     data3 = Reference(ws, min_col=2, min_row=CAT_D, max_row=CAT_D+len(CATEGORIES))
     cats3 = Reference(ws, min_col=1, min_row=CAT_D+1, max_row=CAT_D+len(CATEGORIES))
     chart3.add_data(data3, titles_from_data=True)
     chart3.set_categories(cats3)
-    chart3.width = 14; chart3.height = 14
-    ws.add_chart(chart3, 'D34')
+    chart3.width = 18; chart3.height = 12
+    ws.add_chart(chart3, 'D38')
 
     # ── Chart 4: Line — Cumulative Savings ──
     chart4 = LineChart()
@@ -1190,14 +1202,14 @@ def build_dashboard(wb):
     cats4 = Reference(ws, min_col=1, min_row=RUN_D+1, max_row=RUN_D+12)
     chart4.add_data(data4, titles_from_data=True)
     chart4.set_categories(cats4)
-    chart4.width = 14; chart4.height = 14
-    ws.add_chart(chart4, 'M34')
+    chart4.width = 14; chart4.height = 12
+    ws.add_chart(chart4, 'M38')
 
     # ── Monthly summary table ──
-    sec_hdr(ws, 50, 4, '  MONTH-BY-MONTH SUMMARY', 6)
-    col_hdr(ws, 51, ['Month','Income','Expenses','Net Savings','Savings Rate','Status'])
+    sec_hdr(ws, 62, 4, '  MONTH-BY-MONTH SUMMARY', 6)
+    col_hdr(ws, 63, ['Month','Income','Expenses','Net Savings','Savings Rate','Status'])
     for i, month in enumerate(MONTHS):
-        r = 52 + i
+        r = 64 + i
         inc = f"='ANNUAL TOTALS'!E{7+i}"
         exp = f"='ANNUAL TOTALS'!F{7+i}"
         net = f"='ANNUAL TOTALS'!G{7+i}"
@@ -1206,8 +1218,8 @@ def build_dashboard(wb):
         drow(ws, r, [month, inc, exp, net, rate, status],
              fmts=[None,'"$"#,##0','"$"#,##0','"$"#,##0','0.0%',None])
 
-    cf_status(ws, 'I52:I63', 'Surplus', 'C8E6C9')
-    cf_status(ws, 'I52:I63', 'Deficit', 'FFCDD2')
+    cf_status(ws, 'I64:I75', 'Surplus', C['success_bg'])
+    cf_status(ws, 'I64:I75', 'Deficit', C['danger_bg'])
 
 
 # ── MAIN ─────────────────────────────────────────────────────────────────────
