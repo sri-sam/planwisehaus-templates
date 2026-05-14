@@ -30,24 +30,34 @@ These are the ONLY colors to use across all products. Never substitute or invent
 
 ```python
 C = {
-    'primary':   '2C5F5A',   # Dark teal-green — titles, nav text, key labels
-    'secondary': '3D8A85',   # Medium teal — section headers, active sidebar, tab color
-    'accent':    'C9A845',   # Gold/amber — KPI card tops, input cell borders, highlights
-    'bg':        'EDEAE2',   # Warm cream — sheet background
-    'data':      'FFFFFF',   # White — data cell fill
-    'sidebar':   'F5F2EC',   # Light cream — navigation sidebar
-    'gray':      'DDD9D0',   # Warm gray — borders, dividers
-    'lt_teal':   'E0F0EE',   # Light teal — alternating rows, KPI card fill, totals
-    'input':     'FFFDE8',   # Pale yellow — user input cells
-    'success':   '2E7D52',   # Green — on-budget, surplus
-    'danger':    'C0392B',   # Red — over-budget, deficit
+    'primary':    '2C5F5A',   # Dark teal-green — titles, nav text, key labels
+    'secondary':  '3D8A85',   # Medium teal — section headers, active sidebar, tab color
+    'accent':     'C9A845',   # Gold/amber — KPI card tops, input cell borders, highlights
+    'bg':         'EDEAE2',   # Warm cream — sheet background
+    'data':       'FFFFFF',   # White — data cell fill
+    'sidebar':    'F5F2EC',   # Light cream — navigation sidebar
+    'gray':       'DDD9D0',   # Warm gray — borders, dividers
+    'lt_teal':    'E0F0EE',   # Light teal — KPI card fill, totals, col header fill
+    'lt_teal_2':  'F0FAF8',   # Lighter teal — alternating (even) data rows
+    'input':      'FFFDE8',   # Pale yellow — user input cells
+    'success':    '2E7D52',   # Green — on-budget, surplus values
+    'danger':     'C0392B',   # Red — over-budget, deficit values
+    'fg_1':       '1F3D3A',   # Primary text (body, data cells)
+    'fg_2':       '4A4A4A',   # Secondary text (descriptions, inline labels)
+    'fg_3':       '777777',   # Muted text (subtitle, metadata)
+    'fg_4':       '999999',   # Faintest text (nav section labels)
+    'warning':    'FFF9C4',   # Pale yellow — 85-100% budget warning bg
+    'success_bg': 'C8E6C9',   # Pale green — paid/surplus pill bg
+    'danger_bg':  'FFCDD2',   # Pale red — overdue/deficit pill bg
+    'over_bg':    'FFE4E0',   # Pink row bg — 100%+ over-budget data rows
 }
 ```
 
 **Tab color**: always `2C5F5A` (primary)
-**Gold accent strip**: row 1, full width — `C9A845`
-**Title format**: `PLANWISE HAUS  ·  [TAB NAME]` in Calibri 22pt bold, primary color
-**Subtitle**: `EXCEL TEMPLATES FOR LIFE & HOME` in Calibri 10pt italic, gray
+**Gold accent strip**: row 1, full width, 5px tall — `C9A845`
+**Title format**: Rich text — `PLANWISE HAUS  ·  ` in primary, `[TAB NAME]` in secondary; Calibri 22pt bold
+**Subtitle**: `EXCEL TEMPLATES FOR LIFE & HOME` in Calibri 10pt italic, `fg_3` gray
+**No emoji in any spreadsheet. No gradients. Negative values use minus sign + danger red, not parentheses.**
 
 ## Workflow
 

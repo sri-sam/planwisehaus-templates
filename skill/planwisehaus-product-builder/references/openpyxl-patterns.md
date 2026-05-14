@@ -16,6 +16,8 @@ from openpyxl.chart import BarChart, LineChart, PieChart, DoughnutChart, Referen
 from openpyxl.chart.label import DataLabelList
 from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.datavalidation import DataValidation
+from openpyxl.cell.text import InlineFont
+from openpyxl.cell.rich_text import TextBlock, CellRichText
 ```
 
 ---
@@ -29,7 +31,7 @@ def create_styles(wb):
             font=Font(name='Calibri', size=22, bold=True, color=C['primary']),
             alignment=Alignment(vertical='center')),
         NamedStyle(name='pwh_subtitle',
-            font=Font(name='Calibri', size=10, italic=True, color='777777'),
+            font=Font(name='Calibri', size=10, italic=True, color=C['fg_3']),
             alignment=Alignment(vertical='center')),
         NamedStyle(name='pwh_sec_hdr',
             font=Font(name='Calibri', size=10, bold=True, color='FFFFFF'),
@@ -41,13 +43,13 @@ def create_styles(wb):
             alignment=Alignment(horizontal='center', vertical='center'),
             border=Border(bottom=Side(style='medium', color=C['secondary']))),
         NamedStyle(name='pwh_data',
-            font=Font(name='Calibri', size=10, color='333333'),
+            font=Font(name='Calibri', size=10, color=C['fg_1']),
             fill=PatternFill(start_color=C['data'], fill_type='solid'),
             alignment=Alignment(vertical='center'),
             border=Border(bottom=Side(style='thin', color=C['gray']))),
         NamedStyle(name='pwh_data_alt',
-            font=Font(name='Calibri', size=10, color='333333'),
-            fill=PatternFill(start_color='F0FAF8', fill_type='solid'),
+            font=Font(name='Calibri', size=10, color=C['fg_1']),
+            fill=PatternFill(start_color=C['lt_teal_2'], fill_type='solid'),
             alignment=Alignment(vertical='center'),
             border=Border(bottom=Side(style='thin', color=C['gray']))),
         NamedStyle(name='pwh_total',
@@ -56,7 +58,7 @@ def create_styles(wb):
             border=Border(top=Side(style='medium', color=C['secondary']),
                          bottom=Side(style='double', color=C['primary']))),
         NamedStyle(name='pwh_input',
-            font=Font(name='Calibri', size=10, color='333333'),
+            font=Font(name='Calibri', size=10, color=C['fg_1']),
             fill=PatternFill(start_color=C['input'], fill_type='solid'),
             border=Border(bottom=Side(style='thin', color=C['accent'])),
             alignment=Alignment(vertical='center')),
@@ -65,7 +67,7 @@ def create_styles(wb):
             fill=PatternFill(start_color=C['lt_teal'], fill_type='solid'),
             alignment=Alignment(horizontal='center', vertical='center')),
         NamedStyle(name='pwh_kpi_lbl',
-            font=Font(name='Calibri', size=8, color='888888'),
+            font=Font(name='Calibri', size=9, bold=True, color='888888'),
             fill=PatternFill(start_color=C['lt_teal'], fill_type='solid'),
             alignment=Alignment(horizontal='center', vertical='center')),
         NamedStyle(name='pwh_nav_link',
@@ -77,7 +79,7 @@ def create_styles(wb):
             fill=PatternFill(start_color=C['secondary'], fill_type='solid'),
             alignment=Alignment(vertical='center')),
         NamedStyle(name='pwh_nav_section',
-            font=Font(name='Calibri', size=7, bold=True, color='999999'),
+            font=Font(name='Calibri', size=7, bold=True, color=C['fg_4']),
             fill=PatternFill(start_color=C['sidebar'], fill_type='solid'),
             alignment=Alignment(vertical='center')),
     ]
@@ -117,9 +119,14 @@ def setup_sheet(ws, tab_title, active_tab, all_tabs):
     acc = PatternFill(start_color=C['accent'], fill_type='solid')
     for col in range(1, 51):
         ws.cell(row=1, column=col).fill = acc
-    # Title
-    ws['D2'] = 'PLANWISE HAUS  -  ' + tab_title
-    ws['D2'].style = 'pwh_title'
+    # Title: brand prefix in primary, tab name in secondary teal (rich text)
+    tf_brand = InlineFont(rFont='Calibri', sz=22, b=True, color=C['primary'])
+    tf_tab   = InlineFont(rFont='Calibri', sz=22, b=True, color=C['secondary'])
+    ws['D2'] = CellRichText(
+        TextBlock(tf_brand, 'PLANWISE HAUS  ·  '),
+        TextBlock(tf_tab, tab_title),
+    )
+    ws['D2'].alignment = Alignment(vertical='center')
     ws['D3'] = 'EXCEL TEMPLATES FOR LIFE & HOME'
     ws['D3'].style = 'pwh_subtitle'
     # Sidebar
@@ -277,15 +284,16 @@ def cf_text(ws, rng, text, bg_hex):
         type='containsText', operator='containsText', text=text, dxf=ds,
         formula=[f'NOT(ISERROR(SEARCH("{text}",{rng.split(":")[0]})))']))
 
-cf_text(ws, 'J7:J80', 'Paid',     'C8E6C9')  # green
-cf_text(ws, 'J7:J80', 'Pending',  'FFF9C4')  # yellow
-cf_text(ws, 'J7:J80', 'Overdue',  'FFCDD2')  # red
+cf_text(ws, 'J7:J80', 'Paid',     C['success_bg'])  # pale green
+cf_text(ws, 'J7:J80', 'Pending',  C['warning'])      # pale yellow
+cf_text(ws, 'J7:J80', 'Overdue',  C['danger_bg'])    # pale red
 
 # Over-budget / warning on % Used column
+# over_bg (FFE4E0) = lighter pink for the full row; danger_bg (FFCDD2) = pill/status use only
 over_ds = DifferentialStyle(
-    fill=PatternFill(fgColor='FFCDD2'),
+    fill=PatternFill(fgColor=C['over_bg']),
     font=Font(color='B71C1C', bold=True))
-warn_ds = DifferentialStyle(fill=PatternFill(fgColor='FFF9C4'))
+warn_ds = DifferentialStyle(fill=PatternFill(fgColor=C['warning']))
 ws.conditional_formatting.add('H15:H29',
     Rule(type='cellIs', operator='greaterThan', formula=['1'], dxf=over_ds))
 ws.conditional_formatting.add('H15:H29',
@@ -342,7 +350,7 @@ def total_row(ws, row, start_col, label, formulas_by_col, formats_by_col=None):
 
 ```python
 def main():
-    OUT = r'C:\Users\sammy\OneDrive\Documents\Claude\Projects\Editing Etsy Page\PlanWiseHaus_[Product]_2025.xlsx'
+    OUT = r'C:\Users\sammy\OneDrive\Documents\Claude\Projects\Editing Etsy Page\templates\[product-name]\PlanWiseHaus_[Product]_2025.xlsx'
     wb = openpyxl.Workbook()
     wb.remove(wb.active)
     for tab in TABS:
