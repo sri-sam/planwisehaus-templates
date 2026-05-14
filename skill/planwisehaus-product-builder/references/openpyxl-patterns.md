@@ -63,11 +63,11 @@ def create_styles(wb):
             border=Border(bottom=Side(style='thin', color=C['accent'])),
             alignment=Alignment(vertical='center')),
         NamedStyle(name='pwh_kpi_val',
-            font=Font(name='Calibri', size=22, bold=True, color=C['primary']),
+            font=Font(name='Calibri', size=24, bold=True, color=C['primary']),
             fill=PatternFill(start_color=C['lt_teal'], fill_type='solid'),
             alignment=Alignment(horizontal='center', vertical='center')),
         NamedStyle(name='pwh_kpi_lbl',
-            font=Font(name='Calibri', size=9, bold=True, color='888888'),
+            font=Font(name='Calibri', size=9, bold=True, color=C['fg_4']),
             fill=PatternFill(start_color=C['lt_teal'], fill_type='solid'),
             alignment=Alignment(horizontal='center', vertical='center')),
         NamedStyle(name='pwh_nav_link',
@@ -102,7 +102,7 @@ def setup_sheet(ws, tab_title, active_tab, all_tabs):
     ws.sheet_properties.tabColor = C['primary']
     # Background fill
     bg = PatternFill(start_color=C['bg'], fill_type='solid')
-    for row in ws.iter_rows(min_row=1, max_row=120, min_col=1, max_col=50):
+    for row in ws.iter_rows(min_row=1, max_row=200, min_col=1, max_col=50):
         for cell in row:
             cell.fill = bg
     # Row heights
@@ -120,8 +120,10 @@ def setup_sheet(ws, tab_title, active_tab, all_tabs):
     for col in range(1, 51):
         ws.cell(row=1, column=col).fill = acc
     # Title: brand prefix in primary, tab name in secondary teal (rich text)
-    tf_brand = InlineFont(rFont='Calibri', sz=22, b=True, color=C['primary'])
-    tf_tab   = InlineFont(rFont='Calibri', sz=22, b=True, color=C['secondary'])
+    # IMPORTANT: InlineFont requires 8-char ARGB hex — prefix C[] values with 'FF'
+    # 6-char hex gets alpha=00 (transparent) and the title text will be invisible in Excel
+    tf_brand = InlineFont(rFont='Calibri', sz=22, b=True, color='FF' + C['primary'])
+    tf_tab   = InlineFont(rFont='Calibri', sz=22, b=True, color='FF' + C['secondary'])
     ws['D2'] = CellRichText(
         TextBlock(tf_brand, 'PLANWISE HAUS  ·  '),
         TextBlock(tf_tab, tab_title),

@@ -149,7 +149,7 @@ def create_styles(wb):
             pass
 
 # ── HELPERS ──────────────────────────────────────────────────────────────────
-def fill_bg(ws, rows=120, cols=50):
+def fill_bg(ws, rows=200, cols=50):
     bg = PatternFill(start_color=C['bg'], fill_type='solid')
     for row in ws.iter_rows(min_row=1, max_row=rows, min_col=1, max_col=cols):
         for cell in row:

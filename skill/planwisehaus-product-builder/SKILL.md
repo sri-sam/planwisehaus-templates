@@ -86,7 +86,7 @@ Rules that make the difference between amateur and premium:
 1. Gridlines OFF on every sheet — `ws.sheet_view.showGridLines = False`
 2. Gold accent strip on row 1 of every sheet
 3. Navigation sidebar on every sheet (cols A–B) with hyperlinks to all tabs
-4. Background fill on the visible area of every sheet
+4. Background fill covers **rows=200, cols=50** on every sheet — chart data rows placed beyond the visible area must never land on the default white Excel background
 5. Every calculation is a formula — never a hardcoded value
 6. Input cells styled with `input` fill + `accent` border bottom
 7. Data tables zebra-striped, column headers in `lt_teal`
@@ -95,6 +95,7 @@ Rules that make the difference between amateur and premium:
 10. Data validation dropdowns wherever a selection exists
 11. Sample data in first 3–5 rows of every tracker/log tab
 12. Dashboard built LAST — it references all other tabs via formulas
+13. **InlineFont ARGB prefix**: `InlineFont(color=...)` requires 8-char ARGB hex — always write `'FF' + C['primary']`, not `C['primary']` alone. 6-char hex gets alpha=00 and renders as fully transparent (invisible title text in Excel)
 
 Name the output file: `PlanWiseHaus_[ProductName]_[Year].xlsx`
 
