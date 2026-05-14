@@ -1127,30 +1127,32 @@ def build_dashboard(wb):
 
     ws.row_dimensions[16].height = 14
 
-    # ── Chart data (hidden area, rows 130+) ──
-    # Must be below summary table (ends row 75) and sidebar fill range (rows 1-120)
-    CD = 130  # income/expenses/savings: rows 130-142
+    # ── Chart data (hidden area, cols T+ starting row 77) ──
+    # Cols 20-23 (T-W) are off the right edge of the visible content area (D-Q).
+    # Row 77 starts immediately after the summary table (ends row 75) — no gap.
+    CD = 77   # income/expenses/savings header row
+    CC = 20   # first chart-data column (T)
 
     # Income / Expenses / Savings by month
-    ws.cell(row=CD, column=1).value = 'Month'
-    ws.cell(row=CD, column=2).value = 'Income'
-    ws.cell(row=CD, column=3).value = 'Expenses'
-    ws.cell(row=CD, column=4).value = 'Net Savings'
+    ws.cell(row=CD, column=CC).value   = 'Month'
+    ws.cell(row=CD, column=CC+1).value = 'Income'
+    ws.cell(row=CD, column=CC+2).value = 'Expenses'
+    ws.cell(row=CD, column=CC+3).value = 'Net Savings'
     for i, month in enumerate(MONTHS):
         r = CD + 1 + i
-        ws.cell(row=r, column=1).value = month[:3]
-        ws.cell(row=r, column=2).value = f"='ANNUAL TOTALS'!E{7+i}"
-        ws.cell(row=r, column=3).value = f"='ANNUAL TOTALS'!F{7+i}"
-        ws.cell(row=r, column=4).value = f"='ANNUAL TOTALS'!G{7+i}"
+        ws.cell(row=r, column=CC).value   = month[:3]
+        ws.cell(row=r, column=CC+1).value = f"='ANNUAL TOTALS'!E{7+i}"
+        ws.cell(row=r, column=CC+2).value = f"='ANNUAL TOTALS'!F{7+i}"
+        ws.cell(row=r, column=CC+3).value = f"='ANNUAL TOTALS'!G{7+i}"
 
-    # Category totals
-    CAT_D = 150  # categories: rows 150-165
-    ws.cell(row=CAT_D, column=1).value = 'Category'
-    ws.cell(row=CAT_D, column=2).value = 'Annual Total'
+    # Category totals (starts two rows after income block ends: CD+13+2 = row 92)
+    CAT_D = CD + 15
+    ws.cell(row=CAT_D, column=CC).value   = 'Category'
+    ws.cell(row=CAT_D, column=CC+1).value = 'Annual Total'
     ann_col = get_column_letter(4 + 1 + len(MONTHS))
     for i, cat in enumerate(CATEGORIES):
-        ws.cell(row=CAT_D+1+i, column=1).value = cat
-        ws.cell(row=CAT_D+1+i, column=2).value = f"='ANNUAL TOTALS'!{ann_col}{23+i}"
+        ws.cell(row=CAT_D+1+i, column=CC).value   = cat
+        ws.cell(row=CAT_D+1+i, column=CC+1).value = f"='ANNUAL TOTALS'!{ann_col}{23+i}"
 
     # ── Chart layout math ──────────────────────────────────────────────────────
     # Default row height = 16pt. 1cm = 28.346pt → 10cm ≈ 17.7 rows, 12cm ≈ 21.3 rows.
@@ -1163,8 +1165,8 @@ def build_dashboard(wb):
     chart1.type = 'col'
     chart1.grouping = 'clustered'
     style_chart(chart1, 'Monthly Income vs. Expenses')
-    cats1  = Reference(ws, min_col=1, min_row=CD+1, max_row=CD+12)
-    data1  = Reference(ws, min_col=2, max_col=3, min_row=CD, max_row=CD+12)
+    cats1 = Reference(ws, min_col=CC,   min_row=CD+1, max_row=CD+12)
+    data1 = Reference(ws, min_col=CC+1, max_col=CC+2, min_row=CD, max_row=CD+12)
     chart1.add_data(data1, titles_from_data=True)
     chart1.set_categories(cats1)
     chart1.width = 18; chart1.height = 10
@@ -1173,7 +1175,7 @@ def build_dashboard(wb):
     # ── Chart 2: Line — Savings Trend ──
     chart2 = LineChart()
     style_chart(chart2, 'Monthly Net Savings Trend', 'line')
-    data2 = Reference(ws, min_col=4, max_col=4, min_row=CD, max_row=CD+12)
+    data2 = Reference(ws, min_col=CC+3, max_col=CC+3, min_row=CD, max_row=CD+12)
     chart2.add_data(data2, titles_from_data=True)
     chart2.set_categories(cats1)
     chart2.width = 14; chart2.height = 10
@@ -1183,8 +1185,8 @@ def build_dashboard(wb):
     sec_hdr(ws, 37, 4, '  EXPENSE DISTRIBUTION', 12)
     chart3 = DoughnutChart()
     style_chart(chart3, 'Annual Expense by Category', 'donut')
-    data3 = Reference(ws, min_col=2, min_row=CAT_D, max_row=CAT_D+len(CATEGORIES))
-    cats3 = Reference(ws, min_col=1, min_row=CAT_D+1, max_row=CAT_D+len(CATEGORIES))
+    data3 = Reference(ws, min_col=CC+1, min_row=CAT_D, max_row=CAT_D+len(CATEGORIES))
+    cats3 = Reference(ws, min_col=CC,   min_row=CAT_D+1, max_row=CAT_D+len(CATEGORIES))
     chart3.add_data(data3, titles_from_data=True)
     chart3.set_categories(cats3)
     chart3.width = 18; chart3.height = 12
@@ -1193,14 +1195,14 @@ def build_dashboard(wb):
     # ── Chart 4: Line — Cumulative Savings ──
     chart4 = LineChart()
     style_chart(chart4, 'Cumulative Savings This Year', 'line')
-    RUN_D = 175  # cumulative savings: rows 175-187
-    ws.cell(row=RUN_D, column=1).value = 'Month'
-    ws.cell(row=RUN_D, column=2).value = 'Cumulative'
+    RUN_D = CAT_D + len(CATEGORIES) + 2   # two rows after category block
+    ws.cell(row=RUN_D, column=CC).value   = 'Month'
+    ws.cell(row=RUN_D, column=CC+1).value = 'Cumulative'
     for i in range(12):
-        ws.cell(row=RUN_D+1+i, column=1).value = MONTHS[i][:3]
-        ws.cell(row=RUN_D+1+i, column=2).value = f"='ANNUAL TOTALS'!H{7+i}"
-    data4 = Reference(ws, min_col=2, min_row=RUN_D, max_row=RUN_D+12)
-    cats4 = Reference(ws, min_col=1, min_row=RUN_D+1, max_row=RUN_D+12)
+        ws.cell(row=RUN_D+1+i, column=CC).value   = MONTHS[i][:3]
+        ws.cell(row=RUN_D+1+i, column=CC+1).value = f"='ANNUAL TOTALS'!H{7+i}"
+    data4 = Reference(ws, min_col=CC+1, min_row=RUN_D,   max_row=RUN_D+12)
+    cats4 = Reference(ws, min_col=CC,   min_row=RUN_D+1, max_row=RUN_D+12)
     chart4.add_data(data4, titles_from_data=True)
     chart4.set_categories(cats4)
     chart4.width = 14; chart4.height = 12
